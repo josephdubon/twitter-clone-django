@@ -124,5 +124,9 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # Store emails for password reset in 'sent_emails' 'folder
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+# Use custom user model from in twitteruser
+
+AUTH_USER_MODEL = 'twitteruser.TwitterUser'
