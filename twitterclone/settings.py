@@ -117,7 +117,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Redirect to home URL after login and logout
+# Redirect config URLs
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Store emails for password reset in 'sent_emails' 'folder
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
