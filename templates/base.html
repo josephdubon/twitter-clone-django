@@ -6,6 +6,17 @@
 </head>
 <body>
 <main>
+
+    <a href="/">home</a> |
+    {% if user.is_authenticated %}
+        <a href="{% url 'create_tweet' %}">create tweet</a> |
+{#        <a href="{% url 'author_detail' %}">author_detail</a> | #}
+        <a href="/tweet/author/{{ user.id }}">profile</a> |
+        ___________ |
+
+        <a href="{% url 'logout' %}">log out</a> |
+        <a href="{% url 'password_reset' %}">reset password</a>
+    {% endif %}
     {% block content %}
     {% endblock %}
 </main>
