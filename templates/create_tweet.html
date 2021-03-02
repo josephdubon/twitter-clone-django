@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Create New Tweet{% endblock %}
+{% block content %}
+    <h2>Create New Tweet</h2>
+    {% if user.is_authenticated %}
+        <p>Please be mindful of Tweets.</p>
+        <br/>
+        <form method="post">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    {% else %}
+    {% endif %}
+{% endblock %}
+
