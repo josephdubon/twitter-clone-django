@@ -3,12 +3,28 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        Hi {{ user.username }}!
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
-        <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
-    {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">Log In</a> |
-        <a href="{% url 'signup' %}">Sign Up</a>    {% endif %}
+
+    <p>
+        {{ user }}
+        <br/>
+        <a href="/tweet/author/{{ user.id }}">@{{ user }}</a>
+
+    </p>
+
+    {% for tweet in tweets %}
+
+        <ul>
+            <li>
+                <a href="/tweet/author/{{ tweet.author.id }}">{{ tweet.author }}</a>
+                - <a href="/tweet/{{ tweet.id }}">{{ tweet.create_time }}</a></li>
+            <ul>
+                <li>{{ tweet.title }}</li>
+            </ul>
+        </ul>
+
+    {% endfor %}
+
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+
 {% endblock %}
