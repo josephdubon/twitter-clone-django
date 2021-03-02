@@ -9,7 +9,10 @@ class TwitterUserAdmin(UserAdmin):
     add_form = TwitterUserCreationForm
     form = TwitterUserChangeForm
     model = TwitterUser
-    list_display = ['email', 'username', ]
+    list_display = [
+        'username',
+        'email',
+    ]
 
 
 admin.site.register(TwitterUser, TwitterUserAdmin)
