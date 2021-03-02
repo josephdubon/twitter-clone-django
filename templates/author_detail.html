@@ -7,14 +7,20 @@
     <h1>Author Detail</h1>
     <div>
         <h2>{{ author }}</h2>
-        <p>
-            This person has posted the following Tweets:
-        </p>
-        <ul>
-            {% for tweet in tweets %}
-                <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }}</a></li>
-            {% endfor %}
-        </ul>
+        {% if tweets %}
+            <p>
+                This person has posted the following Tweets:
+            </p>
+            <ul>
+                {% for tweet in tweets %}
+                    <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                This person has posted no tweets. Click here to start posting!
+            </p>
+        {% endif %}
     </div>
 
 {% endblock %}
