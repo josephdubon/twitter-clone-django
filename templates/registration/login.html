@@ -3,10 +3,20 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h2>Log In</h2>
+
+    <h1>Welcome to Twitterclone!</h1>
+    <h3>Log in to get posting and see what your friends are up to!</h3>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Log In</button>
     </form>
+    <br/>
+    <br/>
+    <p>
+        Don't have an account?
+        <br/>
+        <a href="{% url 'signup' %}">Click Here to Sign Up</a>
+    </p>
+
 {% endblock %}
