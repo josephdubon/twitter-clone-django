@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Tweet Detail{% endblock %}
+
+{% block content %}
+
+    <h1>Tweet Detail</h1>
+    <div>
+        <h2>{{ tweet.title }}</h2>
+        <p>
+            Posted by <strong> <a href="/tweet/author/{{ tweet.author.id }}">{{ tweet.author }}</a>
+        </strong> on {{ tweet.create_time }}
+        </p>
+        <h2>{{ tweet.body }}</h2>
+    </div>
+
+{% endblock %}

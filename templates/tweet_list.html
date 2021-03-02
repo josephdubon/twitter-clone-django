@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Tweet List{% endblock %}
+
+{% block content %}
+
+    <h1>Tweets</h1>
+    {% for tweet in tweets %}
+        <ul>
+            <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }} {{ tweet.create_time }}</a></li>
+            <li>
+                <a href="/tweet/author/{{ tweet.author.id }}">{{ tweet.author }}</a>
+            </li>
+            <li>{{ tweet.body }}</li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}
