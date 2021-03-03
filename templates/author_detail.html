@@ -18,7 +18,7 @@
             </ul>
         {% else %}
             <p>
-                This person has posted no tweets. Click here to start posting!
+                This person has posted no tweets. Click <a href="{% url 'create_tweet' %}">here</a> to start posting!
             </p>
         {% endif %}
     </div>
