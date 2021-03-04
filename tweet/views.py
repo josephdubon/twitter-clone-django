@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
+
+from twitteruser.models import TwitterUser
 from .models import Tweet
 from .forms import CreateTweetForm
 from twitterclone import settings
@@ -66,7 +68,7 @@ def create_tweet(request):
 
 # Author detail view
 def author_detail_view(request, author_id):
-    author_obj = Tweet.objects.get(id=author_id).author
+    author_obj = TwitterUser.objects.get(id=author_id)
     tweets = Tweet.objects.filter(author=author_id).order_by('-create_time')
 
     return render(request, 'author_detail.html', {
