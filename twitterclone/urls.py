@@ -22,5 +22,6 @@ urlpatterns = [
     path('accounts/', include('authentication.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('tweet/', include('tweet.urls')),
+    path('author/', include('twitteruser.urls')),
     path('', views.tweet_home_view, name='home'),
 ]
