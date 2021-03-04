@@ -64,15 +64,3 @@ def create_tweet(request):
         'create_tweet.html',
         context
     )
-
-
-# Author detail view
-def author_detail_view(request, author_id):
-    author_obj = TwitterUser.objects.get(id=author_id)
-    tweets = Tweet.objects.filter(author=author_id).order_by('-create_time')
-
-    return render(request, 'author_detail.html', {
-        'author': author_obj,
-        'tweets': tweets
-    }
-                  )
