@@ -7,20 +7,22 @@
     <h1>Author Detail</h1>
     <div>
         <h2>{{ author }}</h2>
-        {% if tweets %}
-            <p>
-                This person has posted the following Tweets:
-            </p>
-            <ul>
-                {% for tweet in tweets %}
-                    <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>
-                This person has posted no tweets. Click <a href="{% url 'create_tweet' %}">here</a> to start posting!
-            </p>
-        {% endif %}
+        {{ object }}
+        {{ follow }}
+        {#        {% if tweets %}#}
+        {#            <p>#}
+        {#                This person has posted the following Tweets:#}
+        {#            </p>#}
+        {#            <ul>#}
+        {#                {% for tweet in tweets %}#}
+        {#                    <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }}</a></li>#}
+        {#                {% endfor %}#}
+        {#            </ul>#}
+        {#        {% else %}#}
+        {#            <p>#}
+        {#                This person has posted no tweets. Click <a href="{% url 'create_tweet' %}">here</a> to start posting!#}
+        {#            </p>#}
+        {#        {% endif %}#}
     </div>
 
 {% endblock %}
