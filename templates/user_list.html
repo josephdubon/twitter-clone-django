@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Tweet List{% endblock %}
+
+{% block content %}
+
+    <h1>Twitter Users</h1>
+
+    {% for twitteruser in twitterusers %}
+
+        {% if twitteruser.username != user.username %}
+            <div class="ui segment">
+                <ul>
+                    <li>
+                        {{ twitteruser }}
+                        <br/>
+                        <a href="/user/{{ twitteruser.id }}">
+                            <button class="ui primary button">visit profile</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}
