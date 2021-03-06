@@ -1,21 +1,32 @@
 from django.db import models
-from django.shortcuts import render, reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, reverse, redirect
 from django.views.generic import ListView, DetailView
 
 from tweet.models import Tweet
 from .models import TwitterUser
 
 
-# # Author detail view
-# def author_detail_view(request, author_id):
-#     author_obj = TwitterUser.objects.get(id=author_id)
-#     tweets = Tweet.objects.filter(author=author_id).order_by('-create_time')
-#
-#     return render(request, 'author_detail.html', {
-#         'author': author_obj,
-#         'tweets': tweets
-#     }
-#                   )
+def follow_twitteruser(request, user_id):
+    # get id of users profile you are on
+    user = request.user
+    follow_user = TwitterUser.objects.get(id=user_id)
+    # then add him to followers list
+    user.followers.add(follow_user)
+    user.save()
+    # then redirect home
+    return redirect('home')
+
+
+def unfollow_twitteruser(request, user_id):
+    # get id of users profile you are on
+    user = request.user
+    follow_user = TwitterUser.objects.get(id=user_id)
+    # then add him to followers list
+    user.followers.remove(follow_user)
+    user.save()
+    # then redirect home
+    return redirect('home')
 
 
 class TwitterUserListView(ListView):
@@ -23,27 +34,22 @@ class TwitterUserListView(ListView):
     template_name = 'user_list.html'
     context_object_name = 'twitterusers'  # object_list as default
 
-    # def get_queryset(self):
-    # return TwitterUser.objects.all().exclude(self)
 
+def twitter_user_detail(request, user_id):
+    twitteruser_obj = request.user
+    follow_user = TwitterUser.objects.get(id=user_id)
+    tweets = Tweet.objects.filter(author=follow_user)
+    tweets_total = Tweet.objects.filter(author=follow_user).count()
+    followers_total = follow_user.followers.count()
 
-class TwitterUserDetailView(DetailView):
-    model = TwitterUser
-    template_name = 'author_detail.html'
-    context_object_name = 'twitterusers'  # object_list as default
-
-    def get_object(self, **kwargs):
-        pk = self.kwargs.get('pk')
-        view_twitteruser = TwitterUser.objects.get(pk=pk)
-        return view_twitteruser
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        view_twitteruser = self.get_object()
-        my_twitter = TwitterUser.objects.get(username=self.request.user)
-        if view_twitteruser in my_twitter.followers.all():
-            follow = True
-        else:
-            follow = False
-        context['follow'] = follow
-        return context
+    return render(
+        request,
+        'author_detail.html',
+        {
+            'twitteruser_obj': twitteruser_obj,
+            'follow_user': follow_user,
+            'tweets': tweets,
+            'tweets_total': tweets_total,
+            'followers_total': followers_total,
+        }
+    )
