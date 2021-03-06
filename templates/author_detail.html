@@ -6,23 +6,43 @@
 
     <h1>Author Detail</h1>
     <div>
-        <h2>{{ author }}</h2>
-        {{ object }}
+        <div class="ui grid">
+            <div class="row">
+                <div class="four wide column">
+                    <p>username: <strong>{{ follow_user.username }}</strong></p>
+                    <p>total tweets: <strong>{{ tweets_total }}</strong></p>
+                    <p>total following: <strong>{{ followers_total }}</strong></p>
+
+                    {% if twitteruser_obj.username != follow_user.username %}
+                        <a href="/user/unfollow/{{ follow_user.id }}">
+                            <button type="submit" class="ui negative button">unfollow</button>
+                        </a>
+                        <a href="/user/follow/{{ follow_user.id }}">
+                            <button type="submit" class="ui positive button">follow</button>
+                        </a>
+                    {% endif %}
+
+                </div>
+                <div class="twelve wide column">
+                    {% if tweets %}
+                        <p>
+                            This person has posted the following Tweets:
+                        </p>
+                        <ul>
+                            {% for tweet in tweets %}
+                                <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }} / {{ tweet.author }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>
+                            This person has posted no tweets.
+                        </p>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
         {{ follow }}
-        {#        {% if tweets %}#}
-        {#            <p>#}
-        {#                This person has posted the following Tweets:#}
-        {#            </p>#}
-        {#            <ul>#}
-        {#                {% for tweet in tweets %}#}
-        {#                    <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }}</a></li>#}
-        {#                {% endfor %}#}
-        {#            </ul>#}
-        {#        {% else %}#}
-        {#            <p>#}
-        {#                This person has posted no tweets. Click <a href="{% url 'create_tweet' %}">here</a> to start posting!#}
-        {#            </p>#}
-        {#        {% endif %}#}
     </div>
 
 {% endblock %}
