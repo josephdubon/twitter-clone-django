@@ -11,11 +11,16 @@ from twitterclone import settings
 # Home tweet list view
 @login_required
 def tweet_home_view(request):
+    twitteruser_obj = request.user
+    tweets_total = Tweet.objects.filter(author=twitteruser_obj).count()
+    followers_total = twitteruser_obj.followers.count()
     tweets = Tweet.objects.all().order_by('-create_time')
-    # total_tweets = Tweet.objects.filter(author=settings.AUTH_USER_MODEL).count()
+    tweets = [tweet for tweet in tweets if tweet.author in request.user.followers.all() or request.user == tweet.author]
     return render(request, 'home.html', {
+        'twitteruser_obj': twitteruser_obj,
+        'tweets_total': tweets_total,
+        'followers_total': followers_total,
         'tweets': tweets,
-        # 'total_tweets': total_tweets,
     }
                   )
 
