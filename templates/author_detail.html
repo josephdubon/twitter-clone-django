@@ -31,6 +31,8 @@
                         <ul>
                             {% for tweet in tweets %}
                                 <li><a href="/tweet/{{ tweet.id }}">{{ tweet.title }} / {{ tweet.author }}</a></li>
+                                <small><a href="/tweet/{{ tweet.id }}">read more...</a></small>
+
                             {% endfor %}
                         </ul>
                     {% else %}
