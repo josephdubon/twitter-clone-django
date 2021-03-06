@@ -7,22 +7,17 @@
     <h1>Twitter Users</h1>
 
     {% for twitteruser in twitterusers %}
-
         {% if twitteruser.username != user.username %}
-            <div class="ui segment">
-                <ul>
-                    <li>
-                        {{ twitteruser }}
-                        <br/>
-                        <a href="/user/{{ twitteruser.id }}">
-                            <button class="ui primary button">visit profile</button>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
+            <ul>
+                <li>
+                    {{ twitteruser }}
+                    <br/>
+                    <a href="/user/{{ twitteruser.id }}">
+                        visit profile
+                    </a>
+                </li>
+            </ul>
         {% endif %}
-
     {% endfor %}
 
 {% endblock %}
