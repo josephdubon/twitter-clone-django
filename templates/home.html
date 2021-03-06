@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
     <h1>Home</h1>
 
     <div>
@@ -12,21 +13,16 @@
                     <p>username: <strong>{{ twitteruser_obj.username }}</strong></p>
                     <p>total tweets: <strong>{{ tweets_total }}</strong></p>
                     <p>total following: <strong>{{ followers_total }}</strong></p>
-
-
                 </div>
                 <div class="twelve wide column">
                     {% for tweet in tweets %}
-                            <li>
-                                <a href="/user/{{ tweet.author.id }}">{{ tweet.author }}</a>
-                                - <a href="/tweet/{{ tweet.id }}">{{ tweet.create_time }}</a></li>
-                            <ul>
-                                <li>{{ tweet.title }}</li>
-                                <small><a href="/tweet/{{ tweet.id }}">read more...</a></small>
-                            </ul>
+                        <li>
+                            <a href="/user/{{ tweet.author.id }}">{{ tweet.author }}</a>
+                            - <a href="/tweet/{{ tweet.id }}">{{ tweet.create_time }}</a> <br/>
+                            {{ tweet.title }}</li>
+                        <small><a href="/tweet/{{ tweet.id }}">read more...</a></small>
                     {% endfor %}
                 </div>
-
             </div>
         </div>
         {{ follow }}
